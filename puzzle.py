@@ -2,14 +2,12 @@ import copy
 import logging
 import math
 import textwrap
-import turtle
+import threading
+import time
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
-
 logger = logging.getLogger("main")
-
-paranoid_checks = False
 
 PIECES_STRING = """
 WB
@@ -84,7 +82,6 @@ def parse_pieces(pieces_string):
     if current_piece:
         pieces.append(piece_to_grid(current_piece))
 
-
     white_squares = 0
     black_squares = 0
     for piece in pieces:
@@ -100,8 +97,10 @@ def parse_pieces(pieces_string):
     return pieces
 
 
-
 class AsciiBoard:
+    """This class is used during setup and when reporting results. It is not used during the actual
+    solving of the puzzle, so the code here doesn't need to be fast."""
+
     def __init__(self):
         self.grid = []
         for row in range(8):
@@ -120,15 +119,15 @@ class AsciiBoard:
                     square_is_white = first_square_is_white
                 else:
                     square_is_white = not first_square_is_white
-                if (board_as_uint64 & (1<<bitnr)) != 0:
+                if (board_as_uint64 & (1 << bitnr)) != 0:
                     board.grid[row][col] = "W" if square_is_white else "B"
                 bitnr += 1
         return board
-        
+
     def __str__(self):
         board_as_string = " ABCDEFGH\n"
         for row in range(8):
-            board_as_string += str(row+1)
+            board_as_string += str(row + 1)
             for col in range(8):
                 board_as_string += self.grid[row][col]
             board_as_string += "\n"
@@ -151,16 +150,6 @@ class AsciiBoard:
                     board_as_uint64 |= position_bit
                 bit_nr += 1
 
-        if paranoid_checks:
-            assert board_as_uint64 > 0
-            assert board_as_uint64 < 2**64
-            print(f"AsciiBoard.as_uint64() returning first_grid_is_white:{first_grid_is_white} board_as_uint64:{board_as_uint64} for\n{self}")
-
-            test_board = AsciiBoard.from_uint64(first_grid_is_white, board_as_uint64)
-            if test_board.grid != self.grid:
-                #test1, test2 = self.as_uint64()
-                test_board2 = AsciiBoard.from_uint64(first_grid_is_white, board_as_uint64)
-                raise AssertionError("test_board.grid != self.grid")
         return first_grid_is_white, board_as_uint64
 
     def can_place_piece(self, row0, col0, piece_grid):
@@ -211,7 +200,7 @@ class AsciiBoard:
         return True
 
     def place_piece(self, row0, col0, piece_grid):
-        #logger.info(f"before piece placement: \n{self}")
+        # logger.info(f"before piece placement: \n{self}")
         piece_height = len(piece_grid)
         piece_width = len(piece_grid[0])
         for piece_row in range(piece_height):
@@ -221,207 +210,35 @@ class AsciiBoard:
                 piece_value = piece_grid[piece_row][piece_col]
                 if piece_value != " ":
                     self.grid[row][col] = piece_value
-        #logger.info(f"after piece placement: \n{self}")
 
 
-min_pieces_length = 99
-min_pieces_length_total_count = 0
+complete_board_uint64 = (2 ** 64 - 1)
 
 
-def recursivly_place_pieces_v1(board, pieces):
-    """This is the first (and extremely slow) implementation."""
-    global min_pieces_length, min_pieces_length_total_count
-    if len(pieces) < min_pieces_length:
-        min_pieces_length = len(pieces)
-        logger.info(f"min_pieces_length: {min_pieces_length}\n{board}")
-    elif len(pieces) <= min_pieces_length:
-        min_pieces_length_total_count += 1
-        if (min_pieces_length_total_count % 10000) == 0:
-            logger.info(f"min_pieces_length: {min_pieces_length} min_pieces_length_total_count:{min_pieces_length_total_count}\n{board}")
-
-    if len(pieces) == 0:
-        logger.info(f"""Found a solution:\n{board}""")
-        return
-
-    for piece in pieces:
-        # Try the piece in all rotations in all locations
-        remaining_pieces = copy.copy(pieces)
-        remaining_pieces.remove(piece)
-        piece_rotation = piece[0]
-        piece_height = len(piece_rotation)
-        piece_width = len(piece_rotation[0])
-        for row in range(9 - piece_height):
-            for col in range(9 - piece_width):
-                for piece_rotation in piece:
-                    if board.can_place_piece(row, col, piece_rotation):
-                        next_board = copy.deepcopy(board)
-                        next_board.place_piece(row, col, piece_rotation)
-                        # the piece fits in this position, so try the next piece
-                        recursivly_place_pieces_v1(next_board, remaining_pieces)
-
-
-complete_board_uint64 = (2**64 - 1)
-
-max_depth = 0
-max_depth_total_count = 0
-
-
-def recursivly_place_pieces_v2(first_square_is_white, pieces, depth, current_board, current_placements,
-                               solutions):
+def recursivly_place_pieces(first_square_is_white, pieces, depth, current_board, current_placements,
+                            current_progress, solutions):
     """This is the second implementation, which uses precreated for all possible piece-placements."""
-    if paranoid_checks:
-        board = AsciiBoard.from_uint64(first_square_is_white, current_board)
-        logger.info(f"depth: {depth}\n{board}")
-
-    global max_depth, max_depth_total_count
-    if depth >= max_depth:
-        if depth > max_depth:
-            board = AsciiBoard.from_uint64(first_square_is_white, current_board)
-            max_depth = depth
-            logger.info(f"max_depth: {max_depth}\n{board}")
-        max_depth_total_count += 1
-        if (max_depth_total_count % 1000) == 0:
-            board = AsciiBoard.from_uint64(first_square_is_white, current_board)
-            logger.info(
-                f"max_depth: {max_depth} min_pieces_length_total_count:{max_depth_total_count}\n{board}")
-
-    if depth >= len(pieces):
-        resulting_board = 0
-        for movenr, placement in enumerate(current_placements, start=1):
-            board = AsciiBoard.from_uint64(first_square_is_white, placement)
-            print(f"  Piece#{movenr}:\n{textwrap.indent(str(board), prefix='    ')}")
-
-            if (resulting_board & placement) != 0:
-                print("resulting_board & placement) != 0")
-            resulting_board |= placement
-            print(f" resulting_board:\n{textwrap.indent(str(AsciiBoard.from_uint64(first_square_is_white,resulting_board)), prefix='    ')}")
-        print("")
-
+    max_depth = len(pieces)
     pieces_at_depth = pieces[depth]
-    for placement_index, placement in enumerate(pieces_at_depth):
+    for placement_nr, placement in enumerate(pieces_at_depth, start=1):
+        current_progress[depth] = placement_nr
         if (placement & current_board) == 0:
             # This piece can be placed
             current_placements[depth] = placement
             new_board = placement | current_board
-            if paranoid_checks:
-                test_current_board = AsciiBoard.from_uint64(first_square_is_white, current_board)
-                test_new_board = AsciiBoard.from_uint64(first_square_is_white, new_board)
-                test_placement = AsciiBoard.from_uint64(first_square_is_white, placement)
-                print(f"test_current_board:\n{test_current_board}")
-                print(f"test_placement:\n{test_placement}")
-                print(f"test_new_board:\n{test_new_board}")
 
             if new_board == complete_board_uint64:
-                #for movenr, placement in enumerate(current_placements, start=1):
-                #    board = AsciiBoard.from_uint64(first_square_is_white, placement)
-                #    logger.info(f"  Piece#{movenr}:\n{textwrap.indent(str(board), prefix='    ')}")
-                #logger.info(f"  Resulting board:\n{textwrap.indent(str(AsciiBoard.from_uint64(first_square_is_white, new_board)), prefix='    ')}")
-                solutions.append(copy.deepcopy(current_placements))
-                logger.info(f"Found a solution. len(solutions): {len(solutions)}")
+                solutions.append((first_square_is_white, copy.deepcopy(current_placements)))
+                solution_as_string = textwrap.indent(get_solution_as_string(solutions[-1]), prefix="    ")
+                logger.info(f"Found solution#{len(solutions)}:\n{solution_as_string}")
                 return
             else:
-                recursivly_place_pieces_v2(first_square_is_white, pieces, depth+1,
-                                           new_board, current_placements,
-                                           solutions)
+                recursivly_place_pieces(first_square_is_white, pieces, depth + 1,
+                                        new_board, current_placements,
+                                        current_progress, solutions)
 
-def main():
-    original_pieces = parse_pieces(PIECES_STRING)
-
-    #screen = turtle.getscreen()
-    #t = turtle.Turtle()
-    #t.forward(50)
-
-    # The first piece is the special startpiece, which it is pointless to rotate (since we would just 
-    # get rotated, but otherwise identical solutions if we did).
-    start_piece = original_pieces[0]
-    original_pieces = original_pieces[1:]
-    pieces_with_rotations = []
-    for piece in original_pieces:
-        rotations = get_piece_in_all_rotations(piece)
-        pieces_with_rotations.append(rotations)
-
-    place_start_piece_in_the_center = True
-
-    use_v2 = True
-    use_v1 = False
-    if use_v2:
-        pieces_with_rotations_and_placements = []
-        if place_start_piece_in_the_center:
-            # The start piece is placed in the center position
-            board = AsciiBoard()
-            board.place_piece(3, 3, start_piece)
-            print(board)
-            test, test2 = board.as_uint64()
-            pieces_with_rotations_and_placements.append([board])
-        else:
-            # place the start piece anywhere, so put the start_piece into the list with the rest of the pieces
-            pieces_with_rotations.insert(0, [start_piece])
-
-        for rotations in pieces_with_rotations:
-            piece_with_rotations_and_placements = []
-            for square_piece_grid in rotations:
-                stripped_piece = strip_piece(square_piece_grid)
-                for row in range(8):
-                    for col in range(8):
-                        board = AsciiBoard()
-                        if board.can_place_piece(row, col, stripped_piece):
-                            board.place_piece(row, col, stripped_piece)
-                            piece_with_rotations_and_placements.append(board)
-            pieces_with_rotations_and_placements.append(piece_with_rotations_and_placements)
-
-        pieces_with_rotations_and_placements_as_uint64_first_square_white = []
-        pieces_with_rotations_and_placements_as_uint64_first_square_black = []
-        for piece_with_rotations_and_placements in pieces_with_rotations_and_placements:
-            piece_with_rotations_and_placements_as_uint64_first_square_white = []
-            piece_with_rotations_and_placements_as_uint64_first_square_black = []
-            for board in piece_with_rotations_and_placements:
-                first_grid_is_white, board_as_uint64 = board.as_uint64()
-                if first_grid_is_white:
-                    if board_as_uint64 not in piece_with_rotations_and_placements_as_uint64_first_square_white:
-                        piece_with_rotations_and_placements_as_uint64_first_square_white.append(board_as_uint64)
-                else:
-                    if board_as_uint64 not in piece_with_rotations_and_placements_as_uint64_first_square_black:
-                        piece_with_rotations_and_placements_as_uint64_first_square_black.append(board_as_uint64)
-            pieces_with_rotations_and_placements_as_uint64_first_square_white.append(piece_with_rotations_and_placements_as_uint64_first_square_white)
-            pieces_with_rotations_and_placements_as_uint64_first_square_black.append(piece_with_rotations_and_placements_as_uint64_first_square_black)
-
-        combinations_first_square_white = math.prod(len(pieces) for pieces in pieces_with_rotations_and_placements_as_uint64_first_square_white)
-        combinations_first_square_black = math.prod(len(pieces) for pieces in pieces_with_rotations_and_placements_as_uint64_first_square_black)
-
-        solutions = []
-        for first_square_is_white, pieces_with_rotations_and_placements_as_uint64 in [
-            (True, pieces_with_rotations_and_placements_as_uint64_first_square_white),
-            (False, pieces_with_rotations_and_placements_as_uint64_first_square_black)]:
-            start_piece_placements = pieces_with_rotations_and_placements_as_uint64[0]
-            for start_piece_placement in start_piece_placements:
-                current_board = start_piece_placement
-                current_placements = [start_piece_placement] + [None for _ in range(len(pieces_with_rotations_and_placements_as_uint64) - 1)]
-                depth = 1
-                recursivly_place_pieces_v2(first_square_is_white,
-                                       pieces_with_rotations_and_placements_as_uint64,
-                                       depth,
-                                       current_board,
-                                       current_placements,
-                                        solutions
-                                       )
-
-        logger.info(f"Found {len(solutions)} solutions\n{solutions}")
-
-    if use_v1:
-        start_board = AsciiBoard()
-        if place_start_piece_in_the_center:
-            # The start piece is placed in the center position
-            start_board.place_piece(3, 3, start_piece)
-
-        stripped_pieces_with_rotations = []
-        for pieces in pieces_with_rotations:
-            stripped_pieces = []
-            for square_piece_grid in pieces:
-                stripped_piece = strip_piece(square_piece_grid)
-                stripped_pieces.append(stripped_piece)
-            stripped_pieces_with_rotations.append(stripped_pieces)
-
-        recursivly_place_pieces_v1(start_board, stripped_pieces_with_rotations)
+    if depth < max_depth - 1:
+        current_progress[depth + 1] = 0
 
 
 def piece_to_grid(piece):
@@ -435,7 +252,7 @@ def piece_to_grid(piece):
         else:
             grid[row].append(character)
 
-    if grid[len(grid)-1] == []:
+    if grid[len(grid) - 1] == []:
         # last row is empty, so remove it.
         grid = grid[:-1]
 
@@ -508,22 +325,179 @@ def strip_piece(square_piece):
     return stripped_piece
 
 
+def progress_reporter_worker(progress_info_msg,
+                             progress_reporter_event,
+                             current_progress,
+                             pieces_with_rotations_and_placements_as_uint64):
+    total_combinations = math.prod(len(placements) for placements in pieces_with_rotations_and_placements_as_uint64)
+    logger.info(f"progress_reporter_worker() running progress_info_msg: {progress_info_msg}")
+    starttime = time.monotonic()
+    placement_counts_at_depth = [len(placements) for placements in pieces_with_rotations_and_placements_as_uint64]
+    max_depth = len(placement_counts_at_depth)
+    depth_multipliers = []
+    for depth in range(max_depth):
+        if depth == max_depth - 1:
+            depth_multipliers.append(1)
+        else:
+            remaining_placement_counts = placement_counts_at_depth[1 + depth - max_depth:]
+            multiplier = math.prod(remaining_placement_counts)
+            depth_multipliers.append(multiplier)
+
+    while not progress_reporter_event.is_set():
+        progress_reporter_event.wait(60)
+        elapsed_time = time.monotonic() - starttime
+        remaining_combinations = []
+        remaining_placements = []
+        for depth in range(max_depth):
+            placement_count_at_depth = placement_counts_at_depth[depth]
+            processed_placements_at_depth = current_progress[depth] or 0
+            remaining_placements_at_this_depth = placement_count_at_depth - processed_placements_at_depth
+            multiplier = depth_multipliers[depth]
+            remaining_combinations.append(multiplier * remaining_placements_at_this_depth)
+            remaining_placements.append(remaining_placements_at_this_depth)
+
+        total_remaining_combinations = sum(remaining_combinations)
+        progress_in_percent = (1 - (total_remaining_combinations / total_combinations)) * 100.0
+
+        estimated_remaining_time = elapsed_time * (100.0 / progress_in_percent)
+
+        msg = f"""{progress_info_msg}: {progress_in_percent:.3f}%. Details:
+remaining combinations: {total_remaining_combinations:23d}
+total     combinations: {total_combinations:23d}
+elapsed time: {int(elapsed_time)} seconds
+estimated remaining time: {int(estimated_remaining_time)} seconds
+depth remaining pieces
+"""
+        header_row = "depth           : "
+        value_row = "remaining pieces: "
+        for depth, remaining_piece_count in enumerate(remaining_placements):
+            header_row += f"{depth:4d}"
+            value_row += f"{remaining_piece_count:4d}"
+        msg += header_row + "\n" + value_row
+
+        logger.info(msg)
+
+
+def main():
+    original_pieces = parse_pieces(PIECES_STRING)
+
+    # The first piece is the special startpiece, which it is pointless to rotate (since we would just
+    # get rotated, but otherwise identical solutions if we did).
+    start_piece = original_pieces[0]
+    original_pieces = original_pieces[1:]
+    pieces_with_rotations = []
+    for piece in original_pieces:
+        rotations = get_piece_in_all_rotations(piece)
+        pieces_with_rotations.append(rotations)
+
+    place_start_piece_in_the_center = True
+
+    pieces_with_rotations_and_placements = []
+    if place_start_piece_in_the_center:
+        # The start piece is placed in the center position
+        board = AsciiBoard()
+        board.place_piece(3, 3, start_piece)
+        pieces_with_rotations_and_placements.append([board])
+    else:
+        # place the start piece anywhere, so put the start_piece into the list with the rest of the pieces
+        pieces_with_rotations.insert(0, [start_piece])
+
+    for rotations in pieces_with_rotations:
+        piece_with_rotations_and_placements = []
+        for square_piece_grid in rotations:
+            stripped_piece = strip_piece(square_piece_grid)
+            for row in range(8):
+                for col in range(8):
+                    board = AsciiBoard()
+                    if board.can_place_piece(row, col, stripped_piece):
+                        board.place_piece(row, col, stripped_piece)
+                        piece_with_rotations_and_placements.append(board)
+        pieces_with_rotations_and_placements.append(piece_with_rotations_and_placements)
+
+    # We split the placements into two lists: one where the first square (the top left corder) is white, and
+    # one where it is black (The "first_square_black" list will not give a solution when we place the start-piece
+    # in the center, though, since the start-piece is placed such that the first square must always be white).
+    pieces_with_rotations_and_placements_as_uint64_first_square_white = []
+    pieces_with_rotations_and_placements_as_uint64_first_square_black = []
+    for piece_with_rotations_and_placements in pieces_with_rotations_and_placements:
+        piece_with_rotations_and_placements_as_uint64_first_square_white = []
+        piece_with_rotations_and_placements_as_uint64_first_square_black = []
+        for board in piece_with_rotations_and_placements:
+            first_grid_is_white, board_as_uint64 = board.as_uint64()
+            if first_grid_is_white:
+                if board_as_uint64 not in piece_with_rotations_and_placements_as_uint64_first_square_white:
+                    piece_with_rotations_and_placements_as_uint64_first_square_white.append(board_as_uint64)
+            else:
+                if board_as_uint64 not in piece_with_rotations_and_placements_as_uint64_first_square_black:
+                    piece_with_rotations_and_placements_as_uint64_first_square_black.append(board_as_uint64)
+        pieces_with_rotations_and_placements_as_uint64_first_square_white.append(
+            piece_with_rotations_and_placements_as_uint64_first_square_white)
+        pieces_with_rotations_and_placements_as_uint64_first_square_black.append(
+            piece_with_rotations_and_placements_as_uint64_first_square_black)
+
+    combinations_first_square_white = math.prod(
+        len(pieces) for pieces in pieces_with_rotations_and_placements_as_uint64_first_square_white)
+    combinations_first_square_black = math.prod(
+        len(pieces) for pieces in pieces_with_rotations_and_placements_as_uint64_first_square_black)
+    logger.info(
+        f"There are a total of {combinations_first_square_white + combinations_first_square_black} piece placements")
+
+    solutions = []
+    for first_square_is_white, pieces_with_rotations_and_placements_as_uint64 in [
+        (True, pieces_with_rotations_and_placements_as_uint64_first_square_white),
+        (False, pieces_with_rotations_and_placements_as_uint64_first_square_black)]:
+        start_piece_placements = pieces_with_rotations_and_placements_as_uint64[0]
+
+        current_progress = [0 for _ in range(len(pieces_with_rotations_and_placements_as_uint64))]
+        progress_reporter_event = threading.Event()
+        progress_reporter_thread = threading.Thread(
+            target=progress_reporter_worker,
+            args=[
+                f"Progress for the positions where the first square is {'white' if first_square_is_white else 'black'}",
+                progress_reporter_event,
+                current_progress,
+                pieces_with_rotations_and_placements_as_uint64])
+        progress_reporter_thread.start()
+        for start_piece_nr, start_piece_placement in enumerate(start_piece_placements, start=1):
+            current_progress[0] = start_piece_nr
+            current_board = start_piece_placement
+            current_placements = [start_piece_placement] + [None for _ in range(
+                len(pieces_with_rotations_and_placements_as_uint64) - 1)]
+            depth = 1
+            recursivly_place_pieces(first_square_is_white,
+                                    pieces_with_rotations_and_placements_as_uint64,
+                                    depth,
+                                    current_board,
+                                    current_placements,
+                                    current_progress,
+                                    solutions
+                                    )
+
+        progress_reporter_event.set()
+
+    logger.info(f"Found {len(solutions)} solutions\n{solutions}")
+    for solution_nr, solution in enumerate(solutions, start=1):
+        solution_as_string = textwrap.indent(get_solution_as_string(solution), prefix="    ")
+        logger.info(f"Solution#{solution_nr}/{len(solutions)}:\n{solution_as_string}")
+
+
+def get_solution_as_string(solution):
+    solution_as_string = ""
+    first_square_is_white, placements = solution
+    total_board = 0
+    for movenr, plancement in enumerate(placements, start=1):
+        assert (total_board & plancement) == 0
+        total_board |= plancement
+        solution_as_string += f"""Move¤{movenr}:
+{AsciiBoard.from_uint64(first_square_is_white, plancement)}
+"""
+    return solution_as_string
+
 
 if __name__ == "__main__":
-    solutions = [[103481868288, 1077960768, 2207730630656, 216455360897089536, 2282603319132160, 412856877056, 459009, 2019301482922246144, 530480, 2337403390977376256, 1550, 551911719040, 13871297958533660672], [103481868288, 145806245549309952, 963150610432, 2155905216, 540545024, 13211420065792, 9259647124478361600, 24632, 871464120082235392, 265732, 8097472130012151808, 72340172838010880, 196867], [103481868288, 4224323673915392, 538632, 33008, 139052711936, 4534403132817408, 263175, 551915896832, 1112497192960, 18260963992010752, 16974592, 2233785415175766016, 16185937060769562624], [103481868288, 4255744, 1160820396140789760, 1081145385545629696, 13219976445952, 540542976, 16149943448122687488, 566252800049152, 415546474496, 34013696, 54254851516792832, 248, 1287]]
+    main()
 
-    for solution in solutions:
-        first_square_is_white = True
-        total_board = 0
-        for plancement in solution:
-            assert (total_board & plancement) == 0
-            total_board |= plancement
-            print(f"{AsciiBoard.from_uint64(first_square_is_white, plancement)}")
-        break
-
-    #main()
-
-
+# The log of the first successful run:
 # 2021-11-17 02:58:43,705 - Found a solution. len(solutions): 4
 # 2021-11-17 03:15:40,142 - Found 4 solutions
 # [[103481868288, 1077960768, 2207730630656, 216455360897089536, 2282603319132160, 412856877056, 459009, 2019301482922246144, 530480, 2337403390977376256, 1550, 551911719040, 13871297958533660672], [103481868288, 145806245549309952, 963150610432, 2155905216, 540545024, 13211420065792, 9259647124478361600, 24632, 871464120082235392, 265732, 8097472130012151808, 72340172838010880, 196867], [103481868288, 4224323673915392, 538632, 33008, 139052711936, 4534403132817408, 263175, 551915896832, 1112497192960, 18260963992010752, 16974592, 2233785415175766016, 16185937060769562624], [103481868288, 4255744, 1160820396140789760, 1081145385545629696, 13219976445952, 540542976, 16149943448122687488, 566252800049152, 415546474496, 34013696, 54254851516792832, 248, 1287]]
