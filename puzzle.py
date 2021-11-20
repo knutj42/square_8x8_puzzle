@@ -2,7 +2,6 @@ import copy
 import logging
 import math
 import textwrap
-import threading
 import time
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -215,30 +214,22 @@ class AsciiBoard:
 complete_board_uint64 = (2 ** 64 - 1)
 
 
-def recursivly_place_pieces(first_square_is_white, pieces, depth, current_board, current_placements,
-                            current_progress, solutions):
+def recursivly_place_pieces(pieces, depth, current_board, current_placements,
+                            report_solution):
     """This is the second implementation, which uses precreated for all possible piece-placements."""
-    max_depth = len(pieces)
-    pieces_at_depth = pieces[depth]
-    for placement_nr, placement in enumerate(pieces_at_depth, start=1):
-        current_progress[depth] = placement_nr
+    for placement in pieces[depth]:
         if (placement & current_board) == 0:
             # This piece can be placed
             current_placements[depth] = placement
             new_board = placement | current_board
 
             if new_board == complete_board_uint64:
-                solutions.append((first_square_is_white, copy.deepcopy(current_placements)))
-                solution_as_string = textwrap.indent(get_solution_as_string(solutions[-1]), prefix="    ")
-                logger.info(f"Found solution#{len(solutions)}:\n{solution_as_string}")
+                report_solution(current_placements)
                 return
             else:
-                recursivly_place_pieces(first_square_is_white, pieces, depth + 1,
+                recursivly_place_pieces(pieces, depth + 1,
                                         new_board, current_placements,
-                                        current_progress, solutions)
-
-    if depth < max_depth - 1:
-        current_progress[depth + 1] = 0
+                                        report_solution)
 
 
 def piece_to_grid(piece):
@@ -325,59 +316,6 @@ def strip_piece(square_piece):
     return stripped_piece
 
 
-def progress_reporter_worker(progress_info_msg,
-                             progress_reporter_event,
-                             current_progress,
-                             pieces_with_rotations_and_placements_as_uint64):
-    total_combinations = math.prod(len(placements) for placements in pieces_with_rotations_and_placements_as_uint64)
-    logger.info(f"progress_reporter_worker() running progress_info_msg: {progress_info_msg}")
-    starttime = time.monotonic()
-    placement_counts_at_depth = [len(placements) for placements in pieces_with_rotations_and_placements_as_uint64]
-    max_depth = len(placement_counts_at_depth)
-    depth_multipliers = []
-    for depth in range(max_depth):
-        if depth == max_depth - 1:
-            depth_multipliers.append(1)
-        else:
-            remaining_placement_counts = placement_counts_at_depth[1 + depth - max_depth:]
-            multiplier = math.prod(remaining_placement_counts)
-            depth_multipliers.append(multiplier)
-
-    while not progress_reporter_event.is_set():
-        progress_reporter_event.wait(60)
-        elapsed_time = time.monotonic() - starttime
-        remaining_combinations = []
-        remaining_placements = []
-        for depth in range(max_depth):
-            placement_count_at_depth = placement_counts_at_depth[depth]
-            processed_placements_at_depth = current_progress[depth] or 0
-            remaining_placements_at_this_depth = placement_count_at_depth - processed_placements_at_depth
-            multiplier = depth_multipliers[depth]
-            remaining_combinations.append(multiplier * remaining_placements_at_this_depth)
-            remaining_placements.append(remaining_placements_at_this_depth)
-
-        total_remaining_combinations = sum(remaining_combinations)
-        progress_in_percent = (1 - (total_remaining_combinations / total_combinations)) * 100.0
-
-        estimated_remaining_time = elapsed_time * (100.0 / progress_in_percent)
-
-        msg = f"""{progress_info_msg}: {progress_in_percent:.3f}%. Details:
-remaining combinations: {total_remaining_combinations:23d}
-total     combinations: {total_combinations:23d}
-elapsed time: {int(elapsed_time)} seconds
-estimated remaining time: {int(estimated_remaining_time)} seconds
-depth remaining pieces
-"""
-        header_row = "depth           : "
-        value_row = "remaining pieces: "
-        for depth, remaining_piece_count in enumerate(remaining_placements):
-            header_row += f"{depth:4d}"
-            value_row += f"{remaining_piece_count:4d}"
-        msg += header_row + "\n" + value_row
-
-        logger.info(msg)
-
-
 def main():
     original_pieces = parse_pieces(PIECES_STRING)
 
@@ -446,34 +384,93 @@ def main():
     for first_square_is_white, pieces_with_rotations_and_placements_as_uint64 in [
         (True, pieces_with_rotations_and_placements_as_uint64_first_square_white),
         (False, pieces_with_rotations_and_placements_as_uint64_first_square_black)]:
-        start_piece_placements = pieces_with_rotations_and_placements_as_uint64[0]
 
-        current_progress = [0 for _ in range(len(pieces_with_rotations_and_placements_as_uint64))]
-        progress_reporter_event = threading.Event()
-        progress_reporter_thread = threading.Thread(
-            target=progress_reporter_worker,
-            args=[
-                f"Progress for the positions where the first square is {'white' if first_square_is_white else 'black'}",
-                progress_reporter_event,
-                current_progress,
-                pieces_with_rotations_and_placements_as_uint64])
-        progress_reporter_thread.start()
-        for start_piece_nr, start_piece_placement in enumerate(start_piece_placements, start=1):
-            current_progress[0] = start_piece_nr
-            current_board = start_piece_placement
-            current_placements = [start_piece_placement] + [None for _ in range(
-                len(pieces_with_rotations_and_placements_as_uint64) - 1)]
-            depth = 1
-            recursivly_place_pieces(first_square_is_white,
-                                    pieces_with_rotations_and_placements_as_uint64,
-                                    depth,
-                                    current_board,
-                                    current_placements,
-                                    current_progress,
-                                    solutions
-                                    )
+        current_progress = [0, 0, 0]
+        total_combinations = math.prod(
+            len(placements) for placements in pieces_with_rotations_and_placements_as_uint64)
+        starttime = time.monotonic()
+        placement_counts_at_depth = [len(placements) for placements in
+                                     pieces_with_rotations_and_placements_as_uint64]
+        max_depth = len(placement_counts_at_depth)
+        depth_multipliers = []
+        for depth in range(max_depth):
+            if depth == max_depth - 1:
+                depth_multipliers.append(1)
+            else:
+                remaining_placement_counts = placement_counts_at_depth[1 + depth - max_depth:]
+                multiplier = math.prod(remaining_placement_counts)
+                depth_multipliers.append(multiplier)
 
-        progress_reporter_event.set()
+        def report_progress():
+            elapsed_time = time.monotonic() - starttime
+            remaining_combinations = []
+            remaining_placements = []
+            for depth in range(len(current_progress)):
+                placement_count_at_depth = placement_counts_at_depth[depth]
+                processed_placements_at_depth = current_progress[depth] or 0
+                remaining_placements_at_this_depth = placement_count_at_depth - processed_placements_at_depth
+                multiplier = depth_multipliers[depth]
+                remaining_combinations.append(multiplier * remaining_placements_at_this_depth)
+                remaining_placements.append(remaining_placements_at_this_depth)
+
+            total_remaining_combinations = sum(remaining_combinations)
+            progress_in_percent = (1 - (total_remaining_combinations / total_combinations)) * 100.0
+
+            estimated_remaining_time = 0
+            if elapsed_time> 0 and progress_in_percent > 0 and progress_in_percent < 100:
+                percent_per_second = progress_in_percent / elapsed_time
+                remaining_work_in_percent = 100.0 - progress_in_percent
+                estimated_remaining_time = remaining_work_in_percent / percent_per_second
+
+            msg = f"""Progress for the positions where the first square is {'white' if first_square_is_white else 'black'}: {progress_in_percent:.3f}%. Details:
+remaining combinations: {total_remaining_combinations:23d}
+total     combinations: {total_combinations:23d}
+elapsed time: {int(elapsed_time)} seconds
+estimated remaining time: {int(estimated_remaining_time)} seconds
+"""
+            header_row = "depth           : "
+            value_row = "remaining pieces: "
+            for depth, remaining_piece_count in enumerate(remaining_placements):
+                header_row += f"{depth:4d}"
+                value_row += f"{remaining_piece_count:4d}"
+            msg += header_row + "\n" + value_row
+
+            logger.info(msg)
+
+        def report_solution(solution_placements):
+            solutions.append((first_square_is_white, copy.deepcopy(solution_placements)))
+            solution_as_string = textwrap.indent(get_solution_as_string(solutions[-1]), prefix="    ")
+            logger.info(f"Found solution#{len(solutions)}:\n{solution_as_string}")
+
+        # We only report progress on the first two depths, since doing it for depths > 2 would mean we used
+        # most of the time doing progress tracking and reporting.
+        for depth0_piece_nr, depth0_piece_placement in enumerate(
+                pieces_with_rotations_and_placements_as_uint64[0], start=1):
+            depth_0_board = depth0_piece_placement
+            current_progress[0] = depth0_piece_nr
+
+            for depth1_piece_nr, depth1_piece_placement in enumerate(
+                    pieces_with_rotations_and_placements_as_uint64[1], start=1):
+                current_progress[1] = depth1_piece_nr
+
+                if (depth_0_board & depth1_piece_placement) == 0:
+                    depth_1_board = depth_0_board | depth1_piece_placement
+
+                    for depth2_piece_nr, depth2_piece_placement in enumerate(
+                            pieces_with_rotations_and_placements_as_uint64[2], start=1):
+                        current_progress[2] = depth2_piece_nr
+                        report_progress()
+                        if (depth_1_board & depth2_piece_placement) == 0:
+                            depth_2_board = depth_1_board | depth2_piece_placement
+                            current_placements = [depth0_piece_placement, depth1_piece_placement,
+                                                  depth2_piece_placement] + [None for _ in range(
+                                len(pieces_with_rotations_and_placements_as_uint64) - 3)]
+
+                            depth = 3
+                            recursivly_place_pieces(pieces_with_rotations_and_placements_as_uint64,
+                                                    depth, depth_2_board, current_placements,
+                                                    report_solution
+                                                    )
 
     logger.info(f"Found {len(solutions)} solutions\n{solutions}")
     for solution_nr, solution in enumerate(solutions, start=1):
