@@ -4,6 +4,9 @@ import math
 import textwrap
 import time
 
+from solver import recursivly_place_pieces
+
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
 logger = logging.getLogger("main")
@@ -211,27 +214,6 @@ class AsciiBoard:
                     self.grid[row][col] = piece_value
 
 
-complete_board_uint64 = (2 ** 64 - 1)
-
-
-def recursivly_place_pieces(pieces, depth, current_board, current_placements,
-                            report_solution):
-    """This is the second implementation, which uses precreated for all possible piece-placements."""
-    for placement in pieces[depth]:
-        if (placement & current_board) == 0:
-            # This piece can be placed
-            current_placements[depth] = placement
-            new_board = placement | current_board
-
-            if new_board == complete_board_uint64:
-                report_solution(current_placements)
-                return
-            else:
-                recursivly_place_pieces(pieces, depth + 1,
-                                        new_board, current_placements,
-                                        report_solution)
-
-
 def piece_to_grid(piece):
     row = 0
     grid = [[]]
@@ -385,7 +367,7 @@ def main():
         (True, pieces_with_rotations_and_placements_as_uint64_first_square_white),
         (False, pieces_with_rotations_and_placements_as_uint64_first_square_black)]:
 
-        current_progress = [0, 0, 0]
+        current_progress = [0, 0]
         total_combinations = math.prod(
             len(placements) for placements in pieces_with_rotations_and_placements_as_uint64)
         starttime = time.monotonic()
@@ -449,28 +431,21 @@ estimated remaining time: {int(estimated_remaining_time)} seconds
             depth_0_board = depth0_piece_placement
             current_progress[0] = depth0_piece_nr
 
+
             for depth1_piece_nr, depth1_piece_placement in enumerate(
                     pieces_with_rotations_and_placements_as_uint64[1], start=1):
                 current_progress[1] = depth1_piece_nr
-
+                report_progress()
                 if (depth_0_board & depth1_piece_placement) == 0:
                     depth_1_board = depth_0_board | depth1_piece_placement
+                    current_placements = [depth0_piece_placement, depth1_piece_placement] + [0 for _ in range(
+                        len(pieces_with_rotations_and_placements_as_uint64) - 2)]
 
-                    for depth2_piece_nr, depth2_piece_placement in enumerate(
-                            pieces_with_rotations_and_placements_as_uint64[2], start=1):
-                        current_progress[2] = depth2_piece_nr
-                        report_progress()
-                        if (depth_1_board & depth2_piece_placement) == 0:
-                            depth_2_board = depth_1_board | depth2_piece_placement
-                            current_placements = [depth0_piece_placement, depth1_piece_placement,
-                                                  depth2_piece_placement] + [None for _ in range(
-                                len(pieces_with_rotations_and_placements_as_uint64) - 3)]
-
-                            depth = 3
-                            recursivly_place_pieces(pieces_with_rotations_and_placements_as_uint64,
-                                                    depth, depth_2_board, current_placements,
-                                                    report_solution
-                                                    )
+                    depth = 2
+                    recursivly_place_pieces(pieces_with_rotations_and_placements_as_uint64,
+                                            depth, depth_1_board, current_placements,
+                                            report_solution
+                                            )
 
     logger.info(f"Found {len(solutions)} solutions\n{solutions}")
     for solution_nr, solution in enumerate(solutions, start=1):
