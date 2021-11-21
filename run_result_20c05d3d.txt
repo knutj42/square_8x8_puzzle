@@ -1,0 +1,2154 @@
+This file contains the output of running commit 20c05d3dbd9d8371110ccd6bbc81b6e611ef0e2e
+on my Thinkpad X1 with the "Silent Running" power plan.
+*********************************************************************************************
+
+/home/knut.johannessen/Private/square_8x8_puzzle/venv/bin/python /home/knut.johannessen/Private/square_8x8_puzzle/puzzle/main.py
+2021-11-21 12:48:02,172 - There are a total of 86315270534691028992000 piece placements
+2021-11-21 12:48:02,212 - Progress for the positions where the first square is white: 0.714%. Details:
+remaining combinations: 85698732888014664499200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 3 seconds
+depth           :    0   1
+remaining pieces:    0 139
+2021-11-21 12:48:02,213 - Progress for the positions where the first square is white: 1.429%. Details:
+remaining combinations: 85082195241338300006400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 1 seconds
+depth           :    0   1
+remaining pieces:    0 138
+2021-11-21 12:48:02,214 - Progress for the positions where the first square is white: 2.143%. Details:
+remaining combinations: 84465657594661935513600
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 1 seconds
+depth           :    0   1
+remaining pieces:    0 137
+2021-11-21 12:48:02,215 - Progress for the positions where the first square is white: 2.857%. Details:
+remaining combinations: 83849119947985571020800
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 136
+2021-11-21 12:48:02,215 - Progress for the positions where the first square is white: 3.571%. Details:
+remaining combinations: 83232582301309206528000
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 135
+2021-11-21 12:48:02,215 - Progress for the positions where the first square is white: 4.286%. Details:
+remaining combinations: 82616044654632842035200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 134
+2021-11-21 12:48:02,215 - Progress for the positions where the first square is white: 5.000%. Details:
+remaining combinations: 81999507007956477542400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 133
+2021-11-21 12:48:02,215 - Progress for the positions where the first square is white: 5.714%. Details:
+remaining combinations: 81382969361280113049600
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 132
+2021-11-21 12:48:02,216 - Progress for the positions where the first square is white: 6.429%. Details:
+remaining combinations: 80766431714603748556800
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 131
+2021-11-21 12:48:02,216 - Progress for the positions where the first square is white: 7.143%. Details:
+remaining combinations: 80149894067927384064000
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 130
+2021-11-21 12:48:02,216 - Progress for the positions where the first square is white: 7.857%. Details:
+remaining combinations: 79533356421251019571200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 129
+2021-11-21 12:48:02,216 - Progress for the positions where the first square is white: 8.571%. Details:
+remaining combinations: 78916818774574655078400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 128
+2021-11-21 12:48:02,216 - Progress for the positions where the first square is white: 9.286%. Details:
+remaining combinations: 78300281127898290585600
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 127
+2021-11-21 12:48:02,217 - Progress for the positions where the first square is white: 10.000%. Details:
+remaining combinations: 77683743481221926092800
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 126
+2021-11-21 12:48:02,217 - Progress for the positions where the first square is white: 10.714%. Details:
+remaining combinations: 77067205834545561600000
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 125
+2021-11-21 12:48:02,217 - Progress for the positions where the first square is white: 11.429%. Details:
+remaining combinations: 76450668187869197107200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 124
+2021-11-21 12:48:02,217 - Progress for the positions where the first square is white: 12.143%. Details:
+remaining combinations: 75834130541192832614400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 123
+2021-11-21 12:48:02,217 - Progress for the positions where the first square is white: 12.857%. Details:
+remaining combinations: 75217592894516468121600
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 122
+2021-11-21 12:48:02,218 - Progress for the positions where the first square is white: 13.571%. Details:
+remaining combinations: 74601055247840103628800
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 121
+2021-11-21 12:48:02,218 - Progress for the positions where the first square is white: 14.286%. Details:
+remaining combinations: 73984517601163739136000
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 120
+2021-11-21 12:48:02,218 - Progress for the positions where the first square is white: 15.000%. Details:
+remaining combinations: 73367979954487374643200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 119
+2021-11-21 12:48:02,219 - Progress for the positions where the first square is white: 15.714%. Details:
+remaining combinations: 72751442307811010150400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 118
+2021-11-21 12:48:02,219 - Progress for the positions where the first square is white: 16.429%. Details:
+remaining combinations: 72134904661134645657600
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 117
+2021-11-21 12:48:02,219 - Progress for the positions where the first square is white: 17.143%. Details:
+remaining combinations: 71518367014458281164800
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 116
+2021-11-21 12:48:02,220 - Progress for the positions where the first square is white: 17.857%. Details:
+remaining combinations: 70901829367781916672000
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 115
+2021-11-21 12:48:02,220 - Progress for the positions where the first square is white: 18.571%. Details:
+remaining combinations: 70285291721105552179200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 114
+2021-11-21 12:48:02,220 - Progress for the positions where the first square is white: 19.286%. Details:
+remaining combinations: 69668754074429187686400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 113
+2021-11-21 12:48:02,220 - Progress for the positions where the first square is white: 20.000%. Details:
+remaining combinations: 69052216427752823193600
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 112
+2021-11-21 12:48:02,221 - Progress for the positions where the first square is white: 20.714%. Details:
+remaining combinations: 68435678781076458700800
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 111
+2021-11-21 12:48:02,221 - Progress for the positions where the first square is white: 21.429%. Details:
+remaining combinations: 67819141134400094208000
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 110
+2021-11-21 12:48:02,221 - Progress for the positions where the first square is white: 22.143%. Details:
+remaining combinations: 67202603487723729715200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 109
+2021-11-21 12:48:02,221 - Progress for the positions where the first square is white: 22.857%. Details:
+remaining combinations: 66586065841047365222400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 108
+2021-11-21 12:48:02,221 - Progress for the positions where the first square is white: 23.571%. Details:
+remaining combinations: 65969528194371000729600
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 107
+2021-11-21 12:48:02,221 - Progress for the positions where the first square is white: 24.286%. Details:
+remaining combinations: 65352990547694636236800
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 106
+2021-11-21 12:48:02,222 - Progress for the positions where the first square is white: 25.000%. Details:
+remaining combinations: 64736452901018271744000
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 105
+2021-11-21 12:48:02,222 - Progress for the positions where the first square is white: 25.714%. Details:
+remaining combinations: 64119915254341907251200
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 104
+2021-11-21 12:48:02,222 - Progress for the positions where the first square is white: 26.429%. Details:
+remaining combinations: 63503377607665542758400
+total     combinations: 86315270534691028992000
+elapsed time: 0 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0 103
+2021-11-21 12:48:04,667 - Progress for the positions where the first square is white: 27.143%. Details:
+remaining combinations: 62886839960989178265600
+total     combinations: 86315270534691028992000
+elapsed time: 2 seconds
+estimated remaining time: 6 seconds
+depth           :    0   1
+remaining pieces:    0 102
+2021-11-21 12:48:05,779 - Progress for the positions where the first square is white: 27.857%. Details:
+remaining combinations: 62270302314312813772800
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0 101
+2021-11-21 12:48:05,823 - Progress for the positions where the first square is white: 28.571%. Details:
+remaining combinations: 61653764667636449280000
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0 100
+2021-11-21 12:48:05,834 - Progress for the positions where the first square is white: 29.286%. Details:
+remaining combinations: 61037227020960084787200
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 8 seconds
+depth           :    0   1
+remaining pieces:    0  99
+2021-11-21 12:48:05,834 - Progress for the positions where the first square is white: 30.000%. Details:
+remaining combinations: 60420689374283720294400
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 8 seconds
+depth           :    0   1
+remaining pieces:    0  98
+2021-11-21 12:48:05,835 - Progress for the positions where the first square is white: 30.714%. Details:
+remaining combinations: 59804151727607355801600
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 8 seconds
+depth           :    0   1
+remaining pieces:    0  97
+2021-11-21 12:48:05,835 - Progress for the positions where the first square is white: 31.429%. Details:
+remaining combinations: 59187614080930991308800
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  96
+2021-11-21 12:48:05,835 - Progress for the positions where the first square is white: 32.143%. Details:
+remaining combinations: 58571076434254626816000
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  95
+2021-11-21 12:48:05,835 - Progress for the positions where the first square is white: 32.857%. Details:
+remaining combinations: 57954538787578262323200
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  94
+2021-11-21 12:48:05,870 - Progress for the positions where the first square is white: 33.571%. Details:
+remaining combinations: 57338001140901897830400
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  93
+2021-11-21 12:48:05,870 - Progress for the positions where the first square is white: 34.286%. Details:
+remaining combinations: 56721463494225533337600
+total     combinations: 86315270534691028992000
+elapsed time: 3 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  92
+2021-11-21 12:48:06,281 - Progress for the positions where the first square is white: 35.000%. Details:
+remaining combinations: 56104925847549168844800
+total     combinations: 86315270534691028992000
+elapsed time: 4 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  91
+2021-11-21 12:48:06,782 - Progress for the positions where the first square is white: 35.714%. Details:
+remaining combinations: 55488388200872804352000
+total     combinations: 86315270534691028992000
+elapsed time: 4 seconds
+estimated remaining time: 8 seconds
+depth           :    0   1
+remaining pieces:    0  90
+2021-11-21 12:48:07,887 - Progress for the positions where the first square is white: 36.429%. Details:
+remaining combinations: 54871850554196439859200
+total     combinations: 86315270534691028992000
+elapsed time: 5 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  89
+2021-11-21 12:48:09,569 - Progress for the positions where the first square is white: 37.143%. Details:
+remaining combinations: 54255312907520075366400
+total     combinations: 86315270534691028992000
+elapsed time: 7 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  88
+2021-11-21 12:48:09,609 - Progress for the positions where the first square is white: 37.857%. Details:
+remaining combinations: 53638775260843710873600
+total     combinations: 86315270534691028992000
+elapsed time: 7 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  87
+2021-11-21 12:48:10,221 - Progress for the positions where the first square is white: 38.571%. Details:
+remaining combinations: 53022237614167346380800
+total     combinations: 86315270534691028992000
+elapsed time: 8 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  86
+2021-11-21 12:48:10,267 - Progress for the positions where the first square is white: 39.286%. Details:
+remaining combinations: 52405699967490981888000
+total     combinations: 86315270534691028992000
+elapsed time: 8 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  85
+2021-11-21 12:48:10,268 - Progress for the positions where the first square is white: 40.000%. Details:
+remaining combinations: 51789162320814617395200
+total     combinations: 86315270534691028992000
+elapsed time: 8 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  84
+2021-11-21 12:48:10,424 - Progress for the positions where the first square is white: 40.714%. Details:
+remaining combinations: 51172624674138252902400
+total     combinations: 86315270534691028992000
+elapsed time: 8 seconds
+estimated remaining time: 11 seconds
+depth           :    0   1
+remaining pieces:    0  83
+2021-11-21 12:48:11,264 - Progress for the positions where the first square is white: 41.429%. Details:
+remaining combinations: 50556087027461888409600
+total     combinations: 86315270534691028992000
+elapsed time: 9 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  82
+2021-11-21 12:48:11,265 - Progress for the positions where the first square is white: 42.143%. Details:
+remaining combinations: 49939549380785523916800
+total     combinations: 86315270534691028992000
+elapsed time: 9 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  81
+2021-11-21 12:48:11,265 - Progress for the positions where the first square is white: 42.857%. Details:
+remaining combinations: 49323011734109159424000
+total     combinations: 86315270534691028992000
+elapsed time: 9 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  80
+2021-11-21 12:48:11,581 - Found solution#1:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1      W
+    2     WB
+    3      W
+    4      B
+    5
+    6
+    7
+    8
+
+    Move¤3:
+     ABCDEFGH
+    1
+    2
+    3
+    4BWB
+    5 B
+    6 W
+    7
+    8
+
+    Move¤4:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5W
+    6B
+    7W
+    8BW
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5  W
+    6  BWB
+    7   B
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2
+    3    WB
+    4     W
+    5     BW
+    6
+    7
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1W
+    2B
+    3WBW
+    4
+    5
+    6
+    7
+    8
+
+    Move¤8:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7 BW
+    8  BWB
+
+    Move¤9:
+     ABCDEFGH
+    1    WB
+    2   WB
+    3   B
+    4
+    5
+    6
+    7
+    8
+
+    Move¤10:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6     W
+    7    WBW
+    8     W
+
+    Move¤11:
+     ABCDEFGH
+    1 BWB
+    2 WB
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤12:
+     ABCDEFGH
+    1       B
+    2       W
+    3       B
+    4       W
+    5       B
+    6
+    7
+    8
+
+    Move¤13:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6      BW
+    7       B
+    8      BW
+
+_
+2021-11-21 12:48:11,582 - Progress for the positions where the first square is white: 43.571%. Details:
+remaining combinations: 48706474087432794931200
+total     combinations: 86315270534691028992000
+elapsed time: 9 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  79
+2021-11-21 12:48:13,232 - Progress for the positions where the first square is white: 44.286%. Details:
+remaining combinations: 48089936440756430438400
+total     combinations: 86315270534691028992000
+elapsed time: 11 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  78
+2021-11-21 12:48:13,232 - Progress for the positions where the first square is white: 45.000%. Details:
+remaining combinations: 47473398794080065945600
+total     combinations: 86315270534691028992000
+elapsed time: 11 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  77
+2021-11-21 12:48:13,379 - Progress for the positions where the first square is white: 45.714%. Details:
+remaining combinations: 46856861147403701452800
+total     combinations: 86315270534691028992000
+elapsed time: 11 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  76
+2021-11-21 12:48:14,375 - Progress for the positions where the first square is white: 46.429%. Details:
+remaining combinations: 46240323500727336960000
+total     combinations: 86315270534691028992000
+elapsed time: 12 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  75
+2021-11-21 12:48:15,563 - Progress for the positions where the first square is white: 47.143%. Details:
+remaining combinations: 45623785854050972467200
+total     combinations: 86315270534691028992000
+elapsed time: 13 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  74
+2021-11-21 12:48:15,563 - Progress for the positions where the first square is white: 47.857%. Details:
+remaining combinations: 45007248207374607974400
+total     combinations: 86315270534691028992000
+elapsed time: 13 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  73
+2021-11-21 12:48:15,743 - Progress for the positions where the first square is white: 48.571%. Details:
+remaining combinations: 44390710560698243481600
+total     combinations: 86315270534691028992000
+elapsed time: 13 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  72
+2021-11-21 12:48:16,476 - Progress for the positions where the first square is white: 49.286%. Details:
+remaining combinations: 43774172914021878988800
+total     combinations: 86315270534691028992000
+elapsed time: 14 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  71
+2021-11-21 12:48:16,476 - Progress for the positions where the first square is white: 50.000%. Details:
+remaining combinations: 43157635267345514496000
+total     combinations: 86315270534691028992000
+elapsed time: 14 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  70
+2021-11-21 12:48:17,463 - Progress for the positions where the first square is white: 50.714%. Details:
+remaining combinations: 42541097620669150003200
+total     combinations: 86315270534691028992000
+elapsed time: 15 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  69
+2021-11-21 12:48:17,669 - Progress for the positions where the first square is white: 51.429%. Details:
+remaining combinations: 41924559973992785510400
+total     combinations: 86315270534691028992000
+elapsed time: 15 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  68
+2021-11-21 12:48:17,669 - Progress for the positions where the first square is white: 52.143%. Details:
+remaining combinations: 41308022327316421017600
+total     combinations: 86315270534691028992000
+elapsed time: 15 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  67
+2021-11-21 12:48:17,983 - Progress for the positions where the first square is white: 52.857%. Details:
+remaining combinations: 40691484680640056524800
+total     combinations: 86315270534691028992000
+elapsed time: 15 seconds
+estimated remaining time: 14 seconds
+depth           :    0   1
+remaining pieces:    0  66
+2021-11-21 12:48:18,167 - Progress for the positions where the first square is white: 53.571%. Details:
+remaining combinations: 40074947033963692032000
+total     combinations: 86315270534691028992000
+elapsed time: 15 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  65
+2021-11-21 12:48:18,736 - Progress for the positions where the first square is white: 54.286%. Details:
+remaining combinations: 39458409387287327539200
+total     combinations: 86315270534691028992000
+elapsed time: 16 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  64
+2021-11-21 12:48:18,737 - Progress for the positions where the first square is white: 55.000%. Details:
+remaining combinations: 38841871740610963046400
+total     combinations: 86315270534691028992000
+elapsed time: 16 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  63
+2021-11-21 12:48:19,539 - Progress for the positions where the first square is white: 55.714%. Details:
+remaining combinations: 38225334093934598553600
+total     combinations: 86315270534691028992000
+elapsed time: 17 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  62
+2021-11-21 12:48:20,065 - Progress for the positions where the first square is white: 56.429%. Details:
+remaining combinations: 37608796447258234060800
+total     combinations: 86315270534691028992000
+elapsed time: 17 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  61
+2021-11-21 12:48:20,065 - Progress for the positions where the first square is white: 57.143%. Details:
+remaining combinations: 36992258800581869568000
+total     combinations: 86315270534691028992000
+elapsed time: 17 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  60
+2021-11-21 12:48:20,065 - Progress for the positions where the first square is white: 57.857%. Details:
+remaining combinations: 36375721153905505075200
+total     combinations: 86315270534691028992000
+elapsed time: 17 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  59
+2021-11-21 12:48:20,285 - Progress for the positions where the first square is white: 58.571%. Details:
+remaining combinations: 35759183507229140582400
+total     combinations: 86315270534691028992000
+elapsed time: 18 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  58
+2021-11-21 12:48:21,962 - Progress for the positions where the first square is white: 59.286%. Details:
+remaining combinations: 35142645860552776089600
+total     combinations: 86315270534691028992000
+elapsed time: 19 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  57
+2021-11-21 12:48:21,963 - Progress for the positions where the first square is white: 60.000%. Details:
+remaining combinations: 34526108213876411596800
+total     combinations: 86315270534691028992000
+elapsed time: 19 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  56
+2021-11-21 12:48:22,051 - Progress for the positions where the first square is white: 60.714%. Details:
+remaining combinations: 33909570567200047104000
+total     combinations: 86315270534691028992000
+elapsed time: 19 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  55
+2021-11-21 12:48:23,298 - Progress for the positions where the first square is white: 61.429%. Details:
+remaining combinations: 33293032920523682611200
+total     combinations: 86315270534691028992000
+elapsed time: 21 seconds
+estimated remaining time: 13 seconds
+depth           :    0   1
+remaining pieces:    0  54
+2021-11-21 12:48:23,298 - Progress for the positions where the first square is white: 62.143%. Details:
+remaining combinations: 32676495273847318118400
+total     combinations: 86315270534691028992000
+elapsed time: 21 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  53
+2021-11-21 12:48:23,667 - Progress for the positions where the first square is white: 62.857%. Details:
+remaining combinations: 32059957627170953625600
+total     combinations: 86315270534691028992000
+elapsed time: 21 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  52
+2021-11-21 12:48:24,092 - Progress for the positions where the first square is white: 63.571%. Details:
+remaining combinations: 31443419980494589132800
+total     combinations: 86315270534691028992000
+elapsed time: 21 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  51
+2021-11-21 12:48:24,273 - Progress for the positions where the first square is white: 64.286%. Details:
+remaining combinations: 30826882333818224640000
+total     combinations: 86315270534691028992000
+elapsed time: 22 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  50
+2021-11-21 12:48:24,589 - Progress for the positions where the first square is white: 65.000%. Details:
+remaining combinations: 30210344687141860147200
+total     combinations: 86315270534691028992000
+elapsed time: 22 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  49
+2021-11-21 12:48:24,786 - Progress for the positions where the first square is white: 65.714%. Details:
+remaining combinations: 29593807040465495654400
+total     combinations: 86315270534691028992000
+elapsed time: 22 seconds
+estimated remaining time: 11 seconds
+depth           :    0   1
+remaining pieces:    0  48
+2021-11-21 12:48:26,911 - Progress for the positions where the first square is white: 66.429%. Details:
+remaining combinations: 28977269393789131161600
+total     combinations: 86315270534691028992000
+elapsed time: 24 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  47
+2021-11-21 12:48:27,267 - Progress for the positions where the first square is white: 67.143%. Details:
+remaining combinations: 28360731747112766668800
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 12 seconds
+depth           :    0   1
+remaining pieces:    0  46
+2021-11-21 12:48:27,267 - Progress for the positions where the first square is white: 67.857%. Details:
+remaining combinations: 27744194100436402176000
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 11 seconds
+depth           :    0   1
+remaining pieces:    0  45
+2021-11-21 12:48:27,267 - Progress for the positions where the first square is white: 68.571%. Details:
+remaining combinations: 27127656453760037683200
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 11 seconds
+depth           :    0   1
+remaining pieces:    0  44
+2021-11-21 12:48:27,268 - Progress for the positions where the first square is white: 69.286%. Details:
+remaining combinations: 26511118807083673190400
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 11 seconds
+depth           :    0   1
+remaining pieces:    0  43
+2021-11-21 12:48:27,268 - Progress for the positions where the first square is white: 70.000%. Details:
+remaining combinations: 25894581160407308697600
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 10 seconds
+depth           :    0   1
+remaining pieces:    0  42
+2021-11-21 12:48:27,268 - Progress for the positions where the first square is white: 70.714%. Details:
+remaining combinations: 25278043513730944204800
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 10 seconds
+depth           :    0   1
+remaining pieces:    0  41
+2021-11-21 12:48:27,566 - Progress for the positions where the first square is white: 71.429%. Details:
+remaining combinations: 24661505867054579712000
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 10 seconds
+depth           :    0   1
+remaining pieces:    0  40
+2021-11-21 12:48:27,566 - Progress for the positions where the first square is white: 72.143%. Details:
+remaining combinations: 24044968220378215219200
+total     combinations: 86315270534691028992000
+elapsed time: 25 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  39
+2021-11-21 12:48:28,661 - Progress for the positions where the first square is white: 72.857%. Details:
+remaining combinations: 23428430573701850726400
+total     combinations: 86315270534691028992000
+elapsed time: 26 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  38
+2021-11-21 12:48:29,255 - Found solution#2:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5 B
+    6 W
+    7 BW
+    8 W
+
+    Move¤3:
+     ABCDEFGH
+    1
+    2
+    3      W
+    4      B
+    5     BWB
+    6
+    7
+    8
+
+    Move¤4:
+     ABCDEFGH
+    1      WB
+    2       W
+    3       B
+    4       W
+    5
+    6
+    7
+    8
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2    B
+    3   BWB
+    4     W
+    5
+    6
+    7
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2
+    3
+    4 WB
+    5  W
+    6  BW
+    7
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6     WBW
+    7       B
+    8       W
+
+    Move¤8:
+     ABCDEFGH
+    1   BWB
+    2     WB
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤9:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6    B
+    7   BW
+    8  BW
+
+    Move¤10:
+     ABCDEFGH
+    1  W
+    2 WBW
+    3  W
+    4
+    5
+    6
+    7
+    8
+
+    Move¤11:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7     BW
+    8    BWB
+
+    Move¤12:
+     ABCDEFGH
+    1
+    2
+    3
+    4B
+    5W
+    6B
+    7W
+    8B
+
+    Move¤13:
+     ABCDEFGH
+    1WB
+    2B
+    3WB
+    4
+    5
+    6
+    7
+    8
+
+_
+2021-11-21 12:48:29,256 - Progress for the positions where the first square is white: 73.571%. Details:
+remaining combinations: 22811892927025486233600
+total     combinations: 86315270534691028992000
+elapsed time: 27 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  37
+2021-11-21 12:48:30,055 - Progress for the positions where the first square is white: 74.286%. Details:
+remaining combinations: 22195355280349121740800
+total     combinations: 86315270534691028992000
+elapsed time: 27 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  36
+2021-11-21 12:48:30,673 - Progress for the positions where the first square is white: 75.000%. Details:
+remaining combinations: 21578817633672757248000
+total     combinations: 86315270534691028992000
+elapsed time: 28 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  35
+2021-11-21 12:48:30,846 - Progress for the positions where the first square is white: 75.714%. Details:
+remaining combinations: 20962279986996392755200
+total     combinations: 86315270534691028992000
+elapsed time: 28 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  34
+2021-11-21 12:48:31,537 - Progress for the positions where the first square is white: 76.429%. Details:
+remaining combinations: 20345742340320028262400
+total     combinations: 86315270534691028992000
+elapsed time: 29 seconds
+estimated remaining time: 9 seconds
+depth           :    0   1
+remaining pieces:    0  33
+2021-11-21 12:48:31,814 - Progress for the positions where the first square is white: 77.143%. Details:
+remaining combinations: 19729204693643663769600
+total     combinations: 86315270534691028992000
+elapsed time: 29 seconds
+estimated remaining time: 8 seconds
+depth           :    0   1
+remaining pieces:    0  32
+2021-11-21 12:48:31,814 - Progress for the positions where the first square is white: 77.857%. Details:
+remaining combinations: 19112667046967299276800
+total     combinations: 86315270534691028992000
+elapsed time: 29 seconds
+estimated remaining time: 8 seconds
+depth           :    0   1
+remaining pieces:    0  31
+2021-11-21 12:48:32,190 - Progress for the positions where the first square is white: 78.571%. Details:
+remaining combinations: 18496129400290934784000
+total     combinations: 86315270534691028992000
+elapsed time: 30 seconds
+estimated remaining time: 8 seconds
+depth           :    0   1
+remaining pieces:    0  30
+2021-11-21 12:48:32,314 - Progress for the positions where the first square is white: 79.286%. Details:
+remaining combinations: 17879591753614570291200
+total     combinations: 86315270534691028992000
+elapsed time: 30 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  29
+2021-11-21 12:48:32,314 - Progress for the positions where the first square is white: 80.000%. Details:
+remaining combinations: 17263054106938205798400
+total     combinations: 86315270534691028992000
+elapsed time: 30 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  28
+2021-11-21 12:48:33,215 - Progress for the positions where the first square is white: 80.714%. Details:
+remaining combinations: 16646516460261841305600
+total     combinations: 86315270534691028992000
+elapsed time: 31 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  27
+2021-11-21 12:48:34,638 - Progress for the positions where the first square is white: 81.429%. Details:
+remaining combinations: 16029978813585476812800
+total     combinations: 86315270534691028992000
+elapsed time: 32 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  26
+2021-11-21 12:48:34,638 - Progress for the positions where the first square is white: 82.143%. Details:
+remaining combinations: 15413441166909112320000
+total     combinations: 86315270534691028992000
+elapsed time: 32 seconds
+estimated remaining time: 7 seconds
+depth           :    0   1
+remaining pieces:    0  25
+2021-11-21 12:48:34,638 - Progress for the positions where the first square is white: 82.857%. Details:
+remaining combinations: 14796903520232747827200
+total     combinations: 86315270534691028992000
+elapsed time: 32 seconds
+estimated remaining time: 6 seconds
+depth           :    0   1
+remaining pieces:    0  24
+2021-11-21 12:48:35,209 - Progress for the positions where the first square is white: 83.571%. Details:
+remaining combinations: 14180365873556383334400
+total     combinations: 86315270534691028992000
+elapsed time: 33 seconds
+estimated remaining time: 6 seconds
+depth           :    0   1
+remaining pieces:    0  23
+2021-11-21 12:48:35,579 - Progress for the positions where the first square is white: 84.286%. Details:
+remaining combinations: 13563828226880018841600
+total     combinations: 86315270534691028992000
+elapsed time: 33 seconds
+estimated remaining time: 6 seconds
+depth           :    0   1
+remaining pieces:    0  22
+2021-11-21 12:48:35,579 - Progress for the positions where the first square is white: 85.000%. Details:
+remaining combinations: 12947290580203654348800
+total     combinations: 86315270534691028992000
+elapsed time: 33 seconds
+estimated remaining time: 5 seconds
+depth           :    0   1
+remaining pieces:    0  21
+2021-11-21 12:48:36,032 - Progress for the positions where the first square is white: 85.714%. Details:
+remaining combinations: 12330752933527289856000
+total     combinations: 86315270534691028992000
+elapsed time: 33 seconds
+estimated remaining time: 5 seconds
+depth           :    0   1
+remaining pieces:    0  20
+2021-11-21 12:48:36,518 - Progress for the positions where the first square is white: 86.429%. Details:
+remaining combinations: 11714215286850925363200
+total     combinations: 86315270534691028992000
+elapsed time: 34 seconds
+estimated remaining time: 5 seconds
+depth           :    0   1
+remaining pieces:    0  19
+2021-11-21 12:48:37,247 - Progress for the positions where the first square is white: 87.143%. Details:
+remaining combinations: 11097677640174560870400
+total     combinations: 86315270534691028992000
+elapsed time: 35 seconds
+estimated remaining time: 5 seconds
+depth           :    0   1
+remaining pieces:    0  18
+2021-11-21 12:48:37,248 - Progress for the positions where the first square is white: 87.857%. Details:
+remaining combinations: 10481139993498196377600
+total     combinations: 86315270534691028992000
+elapsed time: 35 seconds
+estimated remaining time: 4 seconds
+depth           :    0   1
+remaining pieces:    0  17
+2021-11-21 12:48:37,399 - Progress for the positions where the first square is white: 88.571%. Details:
+remaining combinations:  9864602346821831884800
+total     combinations: 86315270534691028992000
+elapsed time: 35 seconds
+estimated remaining time: 4 seconds
+depth           :    0   1
+remaining pieces:    0  16
+2021-11-21 12:48:39,001 - Progress for the positions where the first square is white: 89.286%. Details:
+remaining combinations:  9248064700145467392000
+total     combinations: 86315270534691028992000
+elapsed time: 36 seconds
+estimated remaining time: 4 seconds
+depth           :    0   1
+remaining pieces:    0  15
+2021-11-21 12:48:39,007 - Progress for the positions where the first square is white: 90.000%. Details:
+remaining combinations:  8631527053469102899200
+total     combinations: 86315270534691028992000
+elapsed time: 36 seconds
+estimated remaining time: 4 seconds
+depth           :    0   1
+remaining pieces:    0  14
+2021-11-21 12:48:40,117 - Progress for the positions where the first square is white: 90.714%. Details:
+remaining combinations:  8014989406792738406400
+total     combinations: 86315270534691028992000
+elapsed time: 37 seconds
+estimated remaining time: 3 seconds
+depth           :    0   1
+remaining pieces:    0  13
+2021-11-21 12:48:40,199 - Progress for the positions where the first square is white: 91.429%. Details:
+remaining combinations:  7398451760116373913600
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 3 seconds
+depth           :    0   1
+remaining pieces:    0  12
+2021-11-21 12:48:40,244 - Progress for the positions where the first square is white: 92.143%. Details:
+remaining combinations:  6781914113440009420800
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 3 seconds
+depth           :    0   1
+remaining pieces:    0  11
+2021-11-21 12:48:40,244 - Progress for the positions where the first square is white: 92.857%. Details:
+remaining combinations:  6165376466763644928000
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 2 seconds
+depth           :    0   1
+remaining pieces:    0  10
+2021-11-21 12:48:40,705 - Progress for the positions where the first square is white: 93.571%. Details:
+remaining combinations:  5548838820087280435200
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 2 seconds
+depth           :    0   1
+remaining pieces:    0   9
+2021-11-21 12:48:40,705 - Progress for the positions where the first square is white: 94.286%. Details:
+remaining combinations:  4932301173410915942400
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 2 seconds
+depth           :    0   1
+remaining pieces:    0   8
+2021-11-21 12:48:40,705 - Progress for the positions where the first square is white: 95.000%. Details:
+remaining combinations:  4315763526734551449600
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 2 seconds
+depth           :    0   1
+remaining pieces:    0   7
+2021-11-21 12:48:40,705 - Progress for the positions where the first square is white: 95.714%. Details:
+remaining combinations:  3699225880058186956800
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 1 seconds
+depth           :    0   1
+remaining pieces:    0   6
+2021-11-21 12:48:40,705 - Progress for the positions where the first square is white: 96.429%. Details:
+remaining combinations:  3082688233381822464000
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 1 seconds
+depth           :    0   1
+remaining pieces:    0   5
+2021-11-21 12:48:40,706 - Progress for the positions where the first square is white: 97.143%. Details:
+remaining combinations:  2466150586705457971200
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 1 seconds
+depth           :    0   1
+remaining pieces:    0   4
+2021-11-21 12:48:40,958 - Progress for the positions where the first square is white: 97.857%. Details:
+remaining combinations:  1849612940029093478400
+total     combinations: 86315270534691028992000
+elapsed time: 38 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0   3
+2021-11-21 12:48:40,961 - Found solution#3:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6 W
+    7WBWB
+    8
+
+    Move¤3:
+     ABCDEFGH
+    1   B
+    2   WBW
+    3   B
+    4
+    5
+    6
+    7
+    8
+
+    Move¤4:
+     ABCDEFGH
+    1    WBWB
+    2       W
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2
+    3    WB
+    4     WB
+    5     B
+    6
+    7
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5  W
+    6  BWB
+    7    W
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1WBW
+    2  B
+    3  W
+    4
+    5
+    6
+    7
+    8
+
+    Move¤8:
+     ABCDEFGH
+    1
+    2      B
+    3      WB
+    4       W
+    5       B
+    6
+    7
+    8
+
+    Move¤9:
+     ABCDEFGH
+    1
+    2
+    3
+    4 WB
+    5WB
+    6B
+    7
+    8
+
+    Move¤10:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5      W
+    6     WBW
+    7      W
+    8
+
+    Move¤11:
+     ABCDEFGH
+    1
+    2BW
+    3WB
+    4B
+    5
+    6
+    7
+    8
+
+    Move¤12:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8BWBWB
+
+    Move¤13:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7     B B
+    8     WBW
+
+_
+2021-11-21 12:48:41,446 - Progress for the positions where the first square is white: 98.571%. Details:
+remaining combinations:  1233075293352728985600
+total     combinations: 86315270534691028992000
+elapsed time: 39 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0   2
+2021-11-21 12:48:42,481 - Progress for the positions where the first square is white: 99.286%. Details:
+remaining combinations:   616537646676364492800
+total     combinations: 86315270534691028992000
+elapsed time: 40 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0   1
+2021-11-21 12:48:43,640 - Progress for the positions where the first square is white: 100.000%. Details:
+remaining combinations:                       0
+total     combinations: 86315270534691028992000
+elapsed time: 41 seconds
+estimated remaining time: 0 seconds
+depth           :    0   1
+remaining pieces:    0   0
+2021-11-21 12:48:44,033 - Waiting for the worker processes to finish...
+2021-11-21 12:48:53,562 - Found solution#4:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1
+    2    BWBW
+    3      W
+    4
+    5
+    6
+    7
+    8
+
+    Move¤3:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6    B
+    7  WBW
+    8    B
+
+    Move¤4:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7W
+    8BWBW
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2
+    3
+    4  B
+    5 BW
+    6  BW
+    7
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2   W
+    3   BWB
+    4     W
+    5
+    6
+    7
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6     W
+    7     B
+    8     WBW
+
+    Move¤8:
+     ABCDEFGH
+    1
+    2
+    3
+    4B
+    5W
+    6BW
+    7 B
+    8
+
+    Move¤9:
+     ABCDEFGH
+    1
+    2
+    3       B
+    4      BW
+    5     BW
+    6
+    7
+    8
+
+    Move¤10:
+     ABCDEFGH
+    1
+    2 W
+    3WBW
+    4 W
+    5
+    6
+    7
+    8
+
+    Move¤11:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5       B
+    6      BW
+    7      WB
+    8
+
+    Move¤12:
+     ABCDEFGH
+    1   BWBWB
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤13:
+     ABCDEFGH
+    1WBW
+    2B B
+    3
+    4
+    5
+    6
+    7
+    8
+
+_
+2021-11-21 12:48:59,831 - Waiting for the worker processes to finish...
+2021-11-21 12:48:59,839 - Waiting for the solution thread to finish...
+2021-11-21 12:48:59,841 - Found 4 solutions
+[(True, [103481868288, 1077960768, 2207730630656, 216455360897089536, 2282603319132160, 412856877056, 459009, 2019301482922246144, 530480, 2337403390977376256, 1550, 551911719040, 13871297958533660672]), (True, [103481868288, 145806245549309952, 963150610432, 2155905216, 540545024, 13211420065792, 9259647124478361600, 24632, 871464120082235392, 265732, 8097472130012151808, 72340172838010880, 196867]), (True, [103481868288, 4224323673915392, 538632, 33008, 139052711936, 4534403132817408, 263175, 551915896832, 1112497192960, 18260963992010752, 16974592, 2233785415175766016, 16185937060769562624]), (True, [103481868288, 4255744, 1160820396140789760, 1081145385545629696, 13219976445952, 540542976, 16149943448122687488, 566252800049152, 415546474496, 34013696, 54254851516792832, 248, 1287])]
+2021-11-21 12:48:59,842 - Solution#1/4:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1      W
+    2     WB
+    3      W
+    4      B
+    5
+    6
+    7
+    8
+
+    Move¤3:
+     ABCDEFGH
+    1
+    2
+    3
+    4BWB
+    5 B
+    6 W
+    7
+    8
+
+    Move¤4:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5W
+    6B
+    7W
+    8BW
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5  W
+    6  BWB
+    7   B
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2
+    3    WB
+    4     W
+    5     BW
+    6
+    7
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1W
+    2B
+    3WBW
+    4
+    5
+    6
+    7
+    8
+
+    Move¤8:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7 BW
+    8  BWB
+
+    Move¤9:
+     ABCDEFGH
+    1    WB
+    2   WB
+    3   B
+    4
+    5
+    6
+    7
+    8
+
+    Move¤10:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6     W
+    7    WBW
+    8     W
+
+    Move¤11:
+     ABCDEFGH
+    1 BWB
+    2 WB
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤12:
+     ABCDEFGH
+    1       B
+    2       W
+    3       B
+    4       W
+    5       B
+    6
+    7
+    8
+
+    Move¤13:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6      BW
+    7       B
+    8      BW
+
+
+2021-11-21 12:48:59,844 - Solution#2/4:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5 B
+    6 W
+    7 BW
+    8 W
+
+    Move¤3:
+     ABCDEFGH
+    1
+    2
+    3      W
+    4      B
+    5     BWB
+    6
+    7
+    8
+
+    Move¤4:
+     ABCDEFGH
+    1      WB
+    2       W
+    3       B
+    4       W
+    5
+    6
+    7
+    8
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2    B
+    3   BWB
+    4     W
+    5
+    6
+    7
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2
+    3
+    4 WB
+    5  W
+    6  BW
+    7
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6     WBW
+    7       B
+    8       W
+
+    Move¤8:
+     ABCDEFGH
+    1   BWB
+    2     WB
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤9:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6    B
+    7   BW
+    8  BW
+
+    Move¤10:
+     ABCDEFGH
+    1  W
+    2 WBW
+    3  W
+    4
+    5
+    6
+    7
+    8
+
+    Move¤11:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7     BW
+    8    BWB
+
+    Move¤12:
+     ABCDEFGH
+    1
+    2
+    3
+    4B
+    5W
+    6B
+    7W
+    8B
+
+    Move¤13:
+     ABCDEFGH
+    1WB
+    2B
+    3WB
+    4
+    5
+    6
+    7
+    8
+
+
+2021-11-21 12:48:59,845 - Solution#3/4:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6 W
+    7WBWB
+    8
+
+    Move¤3:
+     ABCDEFGH
+    1   B
+    2   WBW
+    3   B
+    4
+    5
+    6
+    7
+    8
+
+    Move¤4:
+     ABCDEFGH
+    1    WBWB
+    2       W
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2
+    3    WB
+    4     WB
+    5     B
+    6
+    7
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5  W
+    6  BWB
+    7    W
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1WBW
+    2  B
+    3  W
+    4
+    5
+    6
+    7
+    8
+
+    Move¤8:
+     ABCDEFGH
+    1
+    2      B
+    3      WB
+    4       W
+    5       B
+    6
+    7
+    8
+
+    Move¤9:
+     ABCDEFGH
+    1
+    2
+    3
+    4 WB
+    5WB
+    6B
+    7
+    8
+
+    Move¤10:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5      W
+    6     WBW
+    7      W
+    8
+
+    Move¤11:
+     ABCDEFGH
+    1
+    2BW
+    3WB
+    4B
+    5
+    6
+    7
+    8
+
+    Move¤12:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8BWBWB
+
+    Move¤13:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7     B B
+    8     WBW
+
+
+2021-11-21 12:48:59,846 - Solution#4/4:
+    Move¤1:
+     ABCDEFGH
+    1
+    2
+    3
+    4   WB
+    5   BW
+    6
+    7
+    8
+
+    Move¤2:
+     ABCDEFGH
+    1
+    2    BWBW
+    3      W
+    4
+    5
+    6
+    7
+    8
+
+    Move¤3:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6    B
+    7  WBW
+    8    B
+
+    Move¤4:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6
+    7W
+    8BWBW
+
+    Move¤5:
+     ABCDEFGH
+    1
+    2
+    3
+    4  B
+    5 BW
+    6  BW
+    7
+    8
+
+    Move¤6:
+     ABCDEFGH
+    1
+    2   W
+    3   BWB
+    4     W
+    5
+    6
+    7
+    8
+
+    Move¤7:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5
+    6     W
+    7     B
+    8     WBW
+
+    Move¤8:
+     ABCDEFGH
+    1
+    2
+    3
+    4B
+    5W
+    6BW
+    7 B
+    8
+
+    Move¤9:
+     ABCDEFGH
+    1
+    2
+    3       B
+    4      BW
+    5     BW
+    6
+    7
+    8
+
+    Move¤10:
+     ABCDEFGH
+    1
+    2 W
+    3WBW
+    4 W
+    5
+    6
+    7
+    8
+
+    Move¤11:
+     ABCDEFGH
+    1
+    2
+    3
+    4
+    5       B
+    6      BW
+    7      WB
+    8
+
+    Move¤12:
+     ABCDEFGH
+    1   BWBWB
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+
+    Move¤13:
+     ABCDEFGH
+    1WBW
+    2B B
+    3
+    4
+    5
+    6
+    7
+    8
+
+
+2021-11-21 12:48:59,847 - Found 4 solutions in 58 seconds.
+
+Process finished with exit code 0
