@@ -1,11 +1,14 @@
 import copy
 import logging
 import math
+import queue
 import textwrap
+import threading
 import time
+import concurrent.futures
+import multiprocessing
 
-from solver import recursivly_place_pieces
-
+import solver
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
@@ -299,6 +302,7 @@ def strip_piece(square_piece):
 
 
 def main():
+    total_starttime = time.monotonic()
     original_pieces = parse_pieces(PIECES_STRING)
 
     # The first piece is the special startpiece, which it is pointless to rotate (since we would just
@@ -362,7 +366,21 @@ def main():
     logger.info(
         f"There are a total of {combinations_first_square_white + combinations_first_square_black} piece placements")
 
+    report_solution_queue = multiprocessing.Queue()
     solutions = []
+
+    def solutions_worker():
+        while True:
+            _first_square_is_white, solution_placements = report_solution_queue.get()
+            if _first_square_is_white is None:
+                break
+            solutions.append((_first_square_is_white, copy.deepcopy(solution_placements)))
+            _solution_as_string = textwrap.indent(get_solution_as_string(solutions[-1]), prefix="    ")
+            logger.info(f"Found solution#{len(solutions)}:\n{_solution_as_string}_")
+
+    solutions_worker_thread = threading.Thread(target=solutions_worker)
+    solutions_worker_thread.start()
+
     for first_square_is_white, pieces_with_rotations_and_placements_as_uint64 in [
         (True, pieces_with_rotations_and_placements_as_uint64_first_square_white),
         (False, pieces_with_rotations_and_placements_as_uint64_first_square_black)]:
@@ -370,7 +388,7 @@ def main():
         current_progress = [0, 0]
         total_combinations = math.prod(
             len(placements) for placements in pieces_with_rotations_and_placements_as_uint64)
-        starttime = time.monotonic()
+        progress_starttime = time.monotonic()
         placement_counts_at_depth = [len(placements) for placements in
                                      pieces_with_rotations_and_placements_as_uint64]
         max_depth = len(placement_counts_at_depth)
@@ -384,7 +402,7 @@ def main():
                 depth_multipliers.append(multiplier)
 
         def report_progress():
-            elapsed_time = time.monotonic() - starttime
+            elapsed_time = time.monotonic() - progress_starttime
             remaining_combinations = []
             remaining_placements = []
             for depth in range(len(current_progress)):
@@ -399,7 +417,7 @@ def main():
             progress_in_percent = (1 - (total_remaining_combinations / total_combinations)) * 100.0
 
             estimated_remaining_time = 0
-            if elapsed_time> 0 and progress_in_percent > 0 and progress_in_percent < 100:
+            if elapsed_time > 0 and progress_in_percent > 0 and progress_in_percent < 100:
                 percent_per_second = progress_in_percent / elapsed_time
                 remaining_work_in_percent = 100.0 - progress_in_percent
                 estimated_remaining_time = remaining_work_in_percent / percent_per_second
@@ -419,10 +437,17 @@ estimated remaining time: {int(estimated_remaining_time)} seconds
 
             logger.info(msg)
 
-        def report_solution(solution_placements):
-            solutions.append((first_square_is_white, copy.deepcopy(solution_placements)))
-            solution_as_string = textwrap.indent(get_solution_as_string(solutions[-1]), prefix="    ")
-            logger.info(f"Found solution#{len(solutions)}:\n{solution_as_string}")
+        work_queue = multiprocessing.Queue(maxsize=multiprocessing.cpu_count())
+        worker_processes = []
+        for _ in range(multiprocessing.cpu_count()):
+            process = multiprocessing.Process(
+                target=solver.run_worker,
+                args=[first_square_is_white,
+                      pieces_with_rotations_and_placements_as_uint64,
+                      work_queue,
+                      report_solution_queue])
+            worker_processes.append(process)
+            process.start()
 
         # We only report progress on the first two depths, since doing it for depths > 2 would mean we used
         # most of the time doing progress tracking and reporting.
@@ -430,8 +455,6 @@ estimated remaining time: {int(estimated_remaining_time)} seconds
                 pieces_with_rotations_and_placements_as_uint64[0], start=1):
             depth_0_board = depth0_piece_placement
             current_progress[0] = depth0_piece_nr
-
-
             for depth1_piece_nr, depth1_piece_placement in enumerate(
                     pieces_with_rotations_and_placements_as_uint64[1], start=1):
                 current_progress[1] = depth1_piece_nr
@@ -440,17 +463,30 @@ estimated remaining time: {int(estimated_remaining_time)} seconds
                     depth_1_board = depth_0_board | depth1_piece_placement
                     current_placements = [depth0_piece_placement, depth1_piece_placement] + [0 for _ in range(
                         len(pieces_with_rotations_and_placements_as_uint64) - 2)]
-
                     depth = 2
-                    recursivly_place_pieces(pieces_with_rotations_and_placements_as_uint64,
-                                            depth, depth_1_board, current_placements,
-                                            report_solution
-                                            )
+                    work_queue.put((depth, depth_1_board, current_placements))
 
+        logger.info("Waiting for the worker processes to finish...")
+        # Tell the worker processes to shut down
+        for _ in range(len(worker_processes)):
+            work_queue.put((None, None, None))
+        for worker_process in worker_processes:
+            worker_process.join(300)
+            if worker_process.exitcode is None:
+                raise AssertionError("Timed out while waiting for a worker process to time out!")
+
+    logger.info("Waiting for the solution thread to finish...")
+    report_solution_queue.put((None, None))
+    solutions_worker_thread.join(60)
+    if solutions_worker_thread.is_alive():
+        raise AssertionError("Timed out while waiting for the solutions_worker_thread to exit!")
     logger.info(f"Found {len(solutions)} solutions\n{solutions}")
     for solution_nr, solution in enumerate(solutions, start=1):
         solution_as_string = textwrap.indent(get_solution_as_string(solution), prefix="    ")
         logger.info(f"Solution#{solution_nr}/{len(solutions)}:\n{solution_as_string}")
+
+    elapsed_time = time.monotonic() - total_starttime
+    logger.info(f"Found {len(solutions)} solutions in {int(elapsed_time)} seconds.")
 
 
 def get_solution_as_string(solution):
