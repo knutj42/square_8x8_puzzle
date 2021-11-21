@@ -1,11 +1,12 @@
 import copy
+import json
 import logging
 import math
-import queue
+import os.path
 import textwrap
 import threading
 import time
-import concurrent.futures
+import os
 import multiprocessing
 
 import solver
@@ -13,6 +14,11 @@ import solver
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
 logger = logging.getLogger("main")
+
+
+EMPTY_SQUARE_CHAR = "."
+WHITE_SQUARE_CHAR = "W"
+BLACK_SQUARE_CHAR = "B"
 
 PIECES_STRING = """
 WB
@@ -67,9 +73,9 @@ def parse_pieces(pieces_string):
     white_squares = 0
     black_squares = 0
     for c in pieces_string:
-        if c == "W":
+        if c == WHITE_SQUARE_CHAR:
             white_squares += 1
-        elif c == "B":
+        elif c == BLACK_SQUARE_CHAR:
             black_squares += 1
     if black_squares != 32 or white_squares != 32:
         raise AssertionError(f"black_squares={black_squares}  white_squares={white_squares}")
@@ -92,9 +98,9 @@ def parse_pieces(pieces_string):
     for piece in pieces:
         for row in piece:
             for square in row:
-                if square == "W":
+                if square == WHITE_SQUARE_CHAR:
                     white_squares += 1
-                elif square == "B":
+                elif square == BLACK_SQUARE_CHAR:
                     black_squares += 1
 
     if black_squares != 32 or white_squares != 32:
@@ -111,7 +117,7 @@ class AsciiBoard:
         for row in range(8):
             self.grid.append([])
             for col in range(8):
-                self.grid[row].append(" ")
+                self.grid[row].append(EMPTY_SQUARE_CHAR)
 
     @staticmethod
     def from_uint64(first_square_is_white, board_as_uint64):
@@ -125,7 +131,7 @@ class AsciiBoard:
                 else:
                     square_is_white = not first_square_is_white
                 if (board_as_uint64 & (1 << bitnr)) != 0:
-                    board.grid[row][col] = "W" if square_is_white else "B"
+                    board.grid[row][col] = WHITE_SQUARE_CHAR if square_is_white else BLACK_SQUARE_CHAR
                 bitnr += 1
         return board
 
@@ -145,8 +151,8 @@ class AsciiBoard:
         for row in range(8):
             for col in range(8):
                 position_bit = 1 << bit_nr
-                if self.grid[row][col] != " ":
-                    square_is_white = self.grid[row][col] == "W"
+                if self.grid[row][col] != EMPTY_SQUARE_CHAR:
+                    square_is_white = self.grid[row][col] == WHITE_SQUARE_CHAR
                     square_has_same_color_as_first_square = ((row + col) % 2) == 0
                     if square_has_same_color_as_first_square:
                         first_grid_is_white = square_is_white
@@ -170,11 +176,11 @@ class AsciiBoard:
         for piece_row in range(piece_height):
             for piece_col in range(piece_width):
                 piece_value = piece_grid[piece_row][piece_col]
-                if piece_value != " ":
+                if piece_value != EMPTY_SQUARE_CHAR:
                     row = row0 + piece_row
                     col = col0 + piece_col
                     # check for overlap with existing pieces
-                    if self.grid[row][col] != " ":
+                    if self.grid[row][col] != EMPTY_SQUARE_CHAR:
                         # this square is occupied
                         return False
 
@@ -182,7 +188,7 @@ class AsciiBoard:
         for piece_row in range(piece_height):
             for piece_col in range(piece_width):
                 piece_value = piece_grid[piece_row][piece_col]
-                if piece_value != " ":
+                if piece_value != EMPTY_SQUARE_CHAR:
                     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                         row = row0 + piece_row + dy
                         col = col0 + piece_col + dx
@@ -197,7 +203,7 @@ class AsciiBoard:
                         col = col0 + piece_col + dx
                         if col >= 0 and col < 8 and row >= 0 and row < 8:
                             grid_value = self.grid[row][col]
-                            if grid_value != " ":
+                            if grid_value != EMPTY_SQUARE_CHAR:
                                 if grid_value != piece_value:
                                     # different colors along a diagonal
                                     return False
@@ -213,7 +219,7 @@ class AsciiBoard:
                 row = row0 + piece_row
                 col = col0 + piece_col
                 piece_value = piece_grid[piece_row][piece_col]
-                if piece_value != " ":
+                if piece_value != EMPTY_SQUARE_CHAR:
                     self.grid[row][col] = piece_value
 
 
@@ -221,6 +227,8 @@ def piece_to_grid(piece):
     row = 0
     grid = [[]]
     for character in piece:
+        if character == " ":
+            character = EMPTY_SQUARE_CHAR
         if character == "\n":
             row += 1
             grid.append([])
@@ -243,7 +251,7 @@ def piece_to_grid(piece):
 
     for row in grid:
         while len(row) < square_grid_size:
-            row.append(" ")
+            row.append(EMPTY_SQUARE_CHAR)
     return grid
 
 
@@ -279,14 +287,14 @@ def strip_piece(square_piece):
     empty_cols = []
     for col in range(square_grid_size):
         for row in range(square_grid_size):
-            if square_piece[row][col] != " ":
+            if square_piece[row][col] != EMPTY_SQUARE_CHAR:
                 break
         else:
             empty_cols.append(col)
     empty_rows = []
     for row in range(square_grid_size):
         for col in range(square_grid_size):
-            if square_piece[row][col] != " ":
+            if square_piece[row][col] != EMPTY_SQUARE_CHAR:
                 break
         else:
             empty_rows.append(row)
@@ -314,7 +322,7 @@ def main():
         rotations = get_piece_in_all_rotations(piece)
         pieces_with_rotations.append(rotations)
 
-    place_start_piece_in_the_center = True
+    place_start_piece_in_the_center = False
 
     pieces_with_rotations_and_placements = []
     if place_start_piece_in_the_center:
@@ -323,7 +331,9 @@ def main():
         board.place_piece(3, 3, start_piece)
         pieces_with_rotations_and_placements.append([board])
     else:
-        # place the start piece anywhere, so put the start_piece into the list with the rest of the pieces
+        # place the start piece anywhere, so put the start_piece into the list with the rest of the pieces. Note
+        # that we don't rotate the startpiece, since that would just result in uninteresting rotated copies of
+        # solutions.
         pieces_with_rotations.insert(0, [start_piece])
 
     for rotations in pieces_with_rotations:
@@ -486,18 +496,21 @@ estimated remaining time: {int(estimated_remaining_time)} seconds
         logger.info(f"Solution#{solution_nr}/{len(solutions)}:\n{solution_as_string}")
 
     elapsed_time = time.monotonic() - total_starttime
-    logger.info(f"Found {len(solutions)} solutions in {int(elapsed_time)} seconds.")
+    solutions_filename = os.path.join(os.getcwd(), f"solutions_{len(solutions)}_{int(time.time())}.txt")
+    with open(solutions_filename, "wt") as solutions_file:
+        json.dump(solutions, solutions_file, indent=2)
+    logger.info(f"Found {len(solutions)} solutions in {int(elapsed_time)} seconds.\nSaved the solutions to the file '{solutions_filename}'.'")
 
 
 def get_solution_as_string(solution):
     solution_as_string = ""
     first_square_is_white, placements = solution
     total_board = 0
-    for movenr, plancement in enumerate(placements, start=1):
-        assert (total_board & plancement) == 0
-        total_board |= plancement
+    for movenr, placement in enumerate(placements, start=1):
+        assert (total_board & placement) == 0
+        total_board |= placement
         solution_as_string += f"""Move¤{movenr}:
-{AsciiBoard.from_uint64(first_square_is_white, plancement)}
+{AsciiBoard.from_uint64(first_square_is_white, placement)}
 """
     return solution_as_string
 
